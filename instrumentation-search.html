@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music Instrumentation Search</title>
+  </head>
+  <body>
+    <h1>Music Instrumentation Search</h1>
+    <form>
+     <h2>1. Select Instrument</h2>
+     <select name="Woodwinds" data-bind="options: woodwindOptions,
+                                         optionsCaption: 'Woodwinds',
+                                         optionsText: 'name',
+                                         optionsValue: 'code',
+                                         value: choosenWoodwind">
+     </select><br>
+     <select name="Brass" data-bind="options: brassOptions,
+                                     optionsCaption: 'Brass',
+                                     optionsText: 'name',
+                                     optionsValue: 'code',
+                                     value: choosenBrass">
+     </select>
+     <h2>2. Number of that instrument</h2>
+     <select name="number" data-bind="options: numberInstrumentOptions,
+                                      optionsText: 'name',
+                                      optionsValue: 'value',
+                                      value: instrumentNumber"></select>
+     <button name="addNumberBtn" data-bind="click: buildQuery">Add</button> 
+    </form>
+     <p data-bind="text: callOut"></p>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+    <script>
+     function InstrumentationViewModel()  { 
+       self = this;
+       self.brassOptions = [
+          { name: "- Horn", code: "ba" },
+          { name: "- Trumpet", code: "bb" },
+          { name: "- Cornet", code: "bc" },
+          { name: "- Trombone", code: "bd" },
+          { name: "- Tuba", code: "be" },
+          { name: "- Baritone", code: "bf" },
+          { name: "- Unspecified brass", code: "bn" },
+          { name: "- Unknown brass", code: "bu" },
+          { name: "- Ethnic brass", code: "by" },
+          { name: "- Other brass", code: "bz" }
+       ];
+       self.choosenBrass= ko.observable();
+       self.choosenWoodwind = ko.observable();
+       self.instrumentNumber = ko.observable();
+       self.numberInstrumentOptions = [
+          { name: 'Any', value: 99 },
+          { name: "1", value: "1" },
+          { name: "2", value: "2" },
+          { name: "3", value: "3" },
+          { name: "4", value: "4" },
+          { name: "5", value: "5" },
+          { name: "6", value: "6" },
+          { name: "7", value: "7" },
+          { name: "8", value: "8" },
+          { name: "9", value: "9" }
+       ];
+
+       self.woodwindOptions = [
+         { name: "- Flute", code: "wa" },
+         { name: "- Oboe", code: "wb" },
+         { name: "- Clarinet", code: "wc" },
+         { name: "- Bassoon", code: "wd" },
+         { name: "- Piccolo", code: "we" },
+         { name: "- English horn", code: "wf" },
+         { name: "- Bass clarinet", code: "wg" },
+         { name: "- Recorder", code: "wh" },
+         { name: "- Saxophone", code: "wi" },
+         { name: "- Unspecified woodwinds", code: "wn" },
+         { name: "- Unknown woodwinds", code: "wu" },
+         { name: "- Ethnic woodwinds", code: "wy" },
+         { name: "- Other woodwinds", code: "wz" }
+       ];
+
+       self.getOption = function(optionList, code) {
+         for(i in optionList) {
+            var option = optionList[i];
+            if(option['code'] == code) {
+              return option['name'].slice(1);
+            }
+         } 
+       }
+
+       self.callOut = ko.observable();
+       self.buildQuery = function() {
+           self.callOut(self.instrumentNumber());
+       }
+
+       
+     }
+
+     ko.applyBindings(new InstrumentationViewModel());
+    </script>
+  </body>
+</html>
+
