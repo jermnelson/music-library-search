@@ -6,6 +6,14 @@
   </head>
   <body>
     <h1>Music Instrumentation Search</h1>
+	 <p>To search the TIGER library catalog for music scores and sound recordings that include particular instruments, voices, or ensembles:</p>
+	  <ol>
+	   <li>Select an instrument, voice or ensemble from the menu.</li>
+	   <li>Specify the number of performers for that instrument or voice; for choral
+ensembles, give the number of parts (such as 4 for 4-part mixed chorus).  Click "<strong>Add</strong>.  Continue adding until the required search data is complete (another instrument, another voice, etc.)</li>
+	   <li>Limit Material Type:  All, Scores, or Sound recordings.</li>
+	   <li>When the instrumentation and material type are complete, click "<strong>Perform TIGER Search</strong>."  See <a href="http://www.coloradocollege.edu/library/index.php/musiclibrary/tips-for-using-the-tiger-music-instrumentation-search">Tips</a> for more information on doing a music instrumentation search.
+	  </ol>
     <form>
      <h2>1. Select Instrument</h2>
      <select name="Woodwinds" data-bind="options: woodwindOptions,
@@ -19,7 +27,43 @@
                                      optionsText: 'name',
                                      optionsValue: 'code',
                                      value: choosenBrass">
-     </select>
+     </select><br>
+	 <select name="Percussion" data-bind="options: percussionOptions,
+                                     optionsCaption: 'Percussion',
+                                     optionsText: 'name',
+                                     optionsValue: 'code',
+                                     value: choosenPercussion">
+     </select><br>
+	 <select name="Keyboard" data-bind="options: keyboardOptions,
+                                     optionsCaption: 'Keyboard',
+                                     optionsText: 'name',
+                                     optionsValue: 'code',
+                                     value: choosenKeyboard">
+     </select><br>
+     <select name="Strings" data-bind="options: stringsOptions,
+                                     optionsCaption: 'Strings',
+                                     optionsText: 'name',
+                                     optionsValue: 'code',
+                                     value: choosenStrings">
+     </select><br>
+     <select name="Voices" data-bind="options: voicesOptions,
+                                     optionsCaption: 'Voices',
+                                     optionsText: 'name',
+                                     optionsValue: 'code',
+                                     value: choosenVoices">
+     </select><br>
+     <select name="Other Instruments" data-bind="options: otherOptions,
+                                     optionsCaption: 'Other Instruments',
+                                     optionsText: 'name',
+                                     optionsValue: 'code',
+                                     value: choosenOther">
+     </select><br>
+     <select name="Choruses" data-bind="options: chorusesOptions,
+                                     optionsCaption: 'Choruses',
+                                     optionsText: 'name',
+                                     optionsValue: 'code',
+                                     value: choosenChoruses">
+     </select><br>
      <h2>2. Number of that instrument</h2>
      <select name="number" data-bind="options: numberInstrumentOptions,
                                       optionsText: 'name',
@@ -34,34 +78,6 @@
     <script>
      function InstrumentationViewModel()  { 
        self = this;
-       self.brassOptions = [
-          { name: "- Horn", code: "ba" },
-          { name: "- Trumpet", code: "bb" },
-          { name: "- Cornet", code: "bc" },
-          { name: "- Trombone", code: "bd" },
-          { name: "- Tuba", code: "be" },
-          { name: "- Baritone", code: "bf" },
-          { name: "- Unspecified brass", code: "bn" },
-          { name: "- Unknown brass", code: "bu" },
-          { name: "- Ethnic brass", code: "by" },
-          { name: "- Other brass", code: "bz" }
-       ];
-       self.choosenBrass= ko.observable();
-       self.choosenWoodwind = ko.observable();
-       self.instrumentNumber = ko.observable();
-       self.numberInstrumentOptions = [
-          { name: 'Any', value: 99 },
-          { name: "1", value: "1" },
-          { name: "2", value: "2" },
-          { name: "3", value: "3" },
-          { name: "4", value: "4" },
-          { name: "5", value: "5" },
-          { name: "6", value: "6" },
-          { name: "7", value: "7" },
-          { name: "8", value: "8" },
-          { name: "9", value: "9" }
-       ];
-
        self.woodwindOptions = [
          { name: "- Flute", code: "wa" },
          { name: "- Oboe", code: "wb" },
@@ -77,7 +93,118 @@
          { name: "- Ethnic woodwinds", code: "wy" },
          { name: "- Other woodwinds", code: "wz" }
        ];
-
+       self.brassOptions = [
+         { name: "- Horn", code: "ba" },
+         { name: "- Trumpet", code: "bb" },
+         { name: "- Cornet", code: "bc" },
+         { name: "- Trombone", code: "bd" },
+         { name: "- Tuba", code: "be" },
+         { name: "- Baritone", code: "bf" },
+         { name: "- Unspecified brass", code: "bn" },
+         { name: "- Unknown brass", code: "bu" },
+         { name: "- Ethnic brass", code: "by" },
+         { name: "- Other brass", code: "bz" }
+       ];
+       self.percussionOptions = [
+		 { name: "- Timpani", code: "pa" },
+         { name: "- Xylophone", code: "pb" },
+         { name: "- Marimba", code: "pc" },
+         { name: "- Drum", code: "pd" },
+         { name: "- Unspecified percussion", code: "pn" },
+         { name: "- Unknown percussion", code: "pu" },
+         { name: "- Ethnic percussion", code: "py" },
+         { name: "- Other percussion", code: "pz" }
+       ];
+       self.keyboardOptions = [
+         { name: "- Piano", code: "ka" },
+         { name: "- Organ", code: "kb" },
+         { name: "- Harpsichord", code: "kc" },
+         { name: "- Clavichord", code: "kd" },
+         { name: "- Continuo", code: "ke" },
+         { name: "- Celeste", code: "kf" },
+         { name: "- Unspecified keyboard", code: "kn" },
+         { name: "- Unknown keyboard", code: "ku" },
+         { name: "- Ethnic keyboard", code: "ky" },
+         { name: "- Other keyboard", code: "kz" }
+       ];
+       self.stringsOptions = [
+         { name: "- Violin", code: "sa" },
+         { name: "- Viola", code: "sb" },
+         { name: "- Violoncello", code: "sc" },
+         { name: "- Double bass", code: "sd" },
+         { name: "- Viol", code: "se" },
+         { name: "- Viola d'amore", code: "sf" },
+         { name: "- Viola da gamba", code: "sg" },
+         { name: "- Unspecified bowed strings", code: "sn" },
+         { name: "- Unknown bowed strings", code: "su" },
+         { name: "- Ethnic bowed strings", code: "sy" },
+         { name: "- Other bowed strings", code: "sz" },
+		 { name: "- Harp", code: "ta" },
+         { name: "- Guitar", code: "tb" },
+         { name: "- Lute", code: "tc" },
+         { name: "- Mandolin", code: "td" },
+         { name: "- Unspecified plucked strings", code: "tn" },
+         { name: "- Unknown plucked strings", code: "tu" },
+         { name: "- Ethnic plucked strings", code: "ty" },
+         { name: "- Other plucked strings", code: "tz" }
+       ];
+       self.voicesOptions = [
+         { name: "- Soprano", code: "va" },
+         { name: "- Mezzo Soprano", code: "vb" },
+         { name: "- Alto", code: "vc" },
+         { name: "- Tenor", code: "vd" },
+         { name: "- Baritone", code: "ve" },
+         { name: "- Bass", code: "vf" },
+         { name: "- Counter tenor", code: "vg" },
+         { name: "- High voice", code: "vh" },
+         { name: "- Medium voice", code: "vi" },
+		 { name: "- Low voice", code: "vj" },
+         { name: "- Unspecified voices", code: "vn" },
+         { name: "- Unknown voices", code: "vu" },
+         { name: "- Ethnic voices", code: "vy" },
+         { name: "- Other voices", code: "vz" }
+       ];
+       self.otherOptions = [
+         { name: "- Synthesizer", code: "ea" },
+         { name: "- Computer", code: "ec" },
+         { name: "- Ondes Martenot", code: "ed" },
+         { name: "- Unspecified electronic", code: "en" },
+         { name: "- Unknown electronic", code: "eu" },
+         { name: "- Other electronic", code: "ez" },
+         { name: "- Unspecified instruments", code: "zn" },
+         { name: "- Unknown instruments", code: "zu" }
+       ];
+       self.chorusesOptions = [
+         { name: "- Childrens", code: "cd" },
+         { name: "- Ethnic", code: "cy" },
+         { name: "- Mens", code: "cc" },
+         { name: "- Mixed", code: "ca" },
+         { name: "- Unknown", code: "cu" },
+         { name: "- Unspecified", code: "cn" },
+         { name: "- Womens", code: "cb" }
+       ];
+	   self.choosenBrass= ko.observable();
+       self.choosenWoodwind = ko.observable();
+	   self.choosenPercussion = ko.observable();
+       self.choosenKeyboard = ko.observable();
+       self.choosenStrings = ko.observable();
+       self.choosenVoices = ko.observable();
+       self.choosenOther = ko.observable();
+       self.choosenChoruses = ko.observable();
+	   self.instrumentNumber = ko.observable();
+       self.numberInstrumentOptions = [
+          { name: 'Any', value: 99 },
+          { name: "1", value: "1" },
+          { name: "2", value: "2" },
+          { name: "3", value: "3" },
+          { name: "4", value: "4" },
+          { name: "5", value: "5" },
+          { name: "6", value: "6" },
+          { name: "7", value: "7" },
+          { name: "8", value: "8" },
+          { name: "9", value: "9" }
+       ];
+	   
        self.getOption = function(optionList, code) {
          for(i in optionList) {
             var option = optionList[i];
